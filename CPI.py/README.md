@@ -6,6 +6,7 @@ The results can be checked against the Bank of Canada's [Inflation Calculator](h
 - `CPI_2.py` - the main program: loads the data, draws the graph, and runs the calculator.
 - `cpi_calc.csv` - monthly CPI data, 1914 to present (Bank of Canada Valet API, series STATIC_INFLATIONCALC; 2002 = 100).
 - `cpi_graph.png` - the graph produced by the program.
+- read me file - the write up
 
 ## How to run [Overview of section]
 1. Install Python 3 and the required libraries: `pip install pandas matplotlib`
