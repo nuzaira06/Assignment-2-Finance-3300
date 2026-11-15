@@ -2,19 +2,18 @@
 Part B: Consumer Price Index (CPI) analysis and inflation calculator.
 Data source: Bank of Canada Valet API, STATIC_INFLATIONCALC series
 (Statistics Canada monthly CPI for Canada, 1914 to present, 2002 = 100),
-saved as cpi.json.
+saved as cpi_calc.csv.
 """
 
-import json
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#Open  the JSON file and parse the data into Python objects
-with open('cpi.json') as f:
-    data = json.load(f)
+#Open  the CSV file and read the data into a DataFrame
+df = pd.read_csv('cpi_calc.csv')
+df['date'] = pd.to_datetime(df['date']) #This turns the date string into real dates
 
-dates = []
-cpi = []
+dates = df['date'].tolist()
+cpi = df['cpi'].tolist()
 
 for obs in data['observations']:
     dates.append(obs['d'])  #the date string
