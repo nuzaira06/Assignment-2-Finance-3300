@@ -22,4 +22,6 @@ percentage change (right axis). The dotted line marks the base level of 100.
 1. Importing pandas and matplotlib.pyplot
 2. Open and read the CSV file by skipping first 8 rows and using datetime to turn data strings into real dates
 
+## Section 2
+calculate annual percentage change 
 

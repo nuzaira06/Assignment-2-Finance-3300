@@ -13,5 +13,10 @@ df = pd.read_csv('cpi_calc.csv',skiprows=8) #skip the first 8 rows of the CSV fi
 df = df.rename(columns={'STATIC_INFLATIONCALC': 'cpi'})
 df['date'] = pd.to_datetime(df['date']) #This turns the date string into real dates
 
-dates = df['date'].tolist()
-cpi = df['cpi'].tolist()
+print(df.head()) #print the first 5 rows of the DataFrame to check if the data is read correctly
+print(df.dtypes)
+
+# to calculate the annual percentage change
+df['annual_change'] = df['cpi'].pct_change(periods=12) * 100 
+print(df['annual_change'].head(20)) #print the first 15 rows of the annual_change column to check if the calculation is correct
+
