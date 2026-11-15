@@ -13,30 +13,45 @@ The results can be checked against the Bank of Canada's [Inflation Calculator](h
 3. Run `python CPI_2.py`.
 4. Enter a price, then a first and second date in `YYYY-MM` format (for example `1914-09`)
 
+# Program info
+Load the data: the CSV is read into a pandas DataFrame (skipping the 8 metadata lines), the CPI column is renamed cpi, and the dates are converted to real dates.
+Annual % change: each month's CPI is compared with the CPI 12 months (12 rows) earlier.
+Graph: the CPI is plotted on the left axis with a dotted line at the base level (100); the annual % change is plotted on the right axis. The graph has a title, axis labels and a combined legend, and is saved as a PNG.
+Calculator: after validating the inputs, the program looks up the CPI at each date and calculates:
+Price in the second period = original price × (CPI at date 2 ÷ CPI at date 1)
+Percent change = (new price − original price) ÷ original price × 100
+Number of years = months between the two dates ÷ 12
+Average annual rate of inflation = ((new price ÷ original price) ^ (1 ÷ years) − 1) × 100 (set to 0% if both dates are the same month)
+
+
 ## CPI Graph
 ![Canada CPI and annual percentage change](cpi_graph.png)
 The blue line is the CPI (left axis, 2002 = 100). The red line is the annual
 percentage change (right axis). The dotted line marks the base level of 100.
 
-## Section 1
+## Section 1 :Importing
 1. Importing pandas and matplotlib.pyplot
 2. Open and read the CSV file by skipping first 8 rows and using datetime to turn data strings into real dates
 
-## Section 3
+## Section 2
 calculate annual percentage change 
 
-# Sec 4
+# Sec 3
 Plot the graph by creating figure, axes,labels, new Annual change line
 
-### Commentary
+### Commentary/Interesting data
+The CPI base is 2002 = 100. A CPI of 170 means prices are 70% higher than the 2002 average.
 
 The CPI line stays almost flat from 1914 until the early 1970s, and then it starts climbing much faster. It passes the base level of 100 around 2002, which makes sense because 2002 is the base year, and it ends at about 170 in 2026. That means prices today are roughly 70% higher than they were in 2002.
 
 The red line (annual % change) is the most interesting part of the graph. The biggest spike is just after World War I, around 1920, when inflation went above 20%. Right after that, prices fell sharply in 1921, and they fell again in the early 1930s during the Great Depression. There is another spike in the late 1940s after World War II, and then a long stretch of high inflation in the 1970s and early 1980s that peaked at around 13% in 1981.
 
+The 1970s and early 1980s. Oil price shocks and high inflation pushed annual inflation to a peak of about 12.9% in July 1981. This is the steepest sustained rise of the modern period, and it is visible as the steep part of the CPI line
+
+
 After the early 1990s, inflation stays low and fairly steady, usually somewhere between 0% and 4%. There are small dips around the 2008-2009 financial crisis and at the start of COVID-19 in 2020. The last big jump is in 2021-2022, when inflation rose to about 8%, the highest in decades. It has come back down to around 3% by 2026
 
-# enhance Calc - perform validation section:
+# Section 4:enhance Calculator by performing validation:
 ## Price validation – get_price()
 Prompt for the price of goods or services.
 Remove $ and , so entries like $1,000 are accepted.
@@ -49,7 +64,7 @@ Split the text at - into a year and a month, convert both to whole numbers, and 
 Check that the date is between the first date in the data (1914-01) and the last date (2026-09). If not, print the allowed range and ask again.
 Return the date once it passes both checks.
 
-# Section 7: Output the Results
+# Section 5: Output the Results
 
 The results are printed in the same layout as the Bank of Canada calculator: dollar amounts with a $ sign, a comma separator, two decimal places (nearest penny) and the CAD currency identifier, followed by the percent change, number of years, average annual rate of inflation, and the CPI of both dates. The graph is then displayed.
 
